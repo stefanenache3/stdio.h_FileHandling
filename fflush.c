@@ -4,7 +4,7 @@ int so_fflush(SO_FILE *stream)
 {
     if(stream->_state=_DEF)
         return 0;
-    if(stream->buff==_RD)
+    if(stream->_state==_RD)
         {
             stream->buff_offset=0;
             stream->buff_size=0;

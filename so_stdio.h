@@ -51,8 +51,7 @@ FUNC_DECL_PREFIX int so_fflush(SO_FILE *stream);
 FUNC_DECL_PREFIX int so_fseek(SO_FILE *stream, long offset, int whence);
 FUNC_DECL_PREFIX long so_ftell(SO_FILE *stream);
 
-FUNC_DECL_PREFIX
-size_t so_fread(void *ptr, size_t size, size_t nmemb, SO_FILE *stream);
+FUNC_DECL_PREFIX size_t so_fread(void *ptr, size_t size, size_t nmemb, SO_FILE *stream);
 
 FUNC_DECL_PREFIX
 size_t so_fwrite(const void *ptr, size_t size, size_t nmemb, SO_FILE *stream);

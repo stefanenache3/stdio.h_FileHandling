@@ -1,6 +1,7 @@
 #include "so_stdio.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 #define DEFAULT_BUFF_SIZE 4096
 
 /*-------------------------------------*/
