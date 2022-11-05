@@ -8,10 +8,12 @@
 #define SO_STDIO_H
 
 #if defined(__linux__)
+#include <unistd.h>
 #define FUNC_DECL_PREFIX
 #elif defined(_WIN32)
 #include <Windows.h>
-
+#include <fileapi.h>
+#define DLL_EXPORTS 1
 #ifdef DLL_EXPORTS
 #define FUNC_DECL_PREFIX __declspec(dllexport)
 #else
