@@ -4,7 +4,7 @@ SH := -shared
 objs := fopen.o fgetc.o fputc.o fread.o fflush.o fwrite.o
 
 .PHONY:clean
-
+#----------OLD VERSION----------------
 main: main.c libso_stdio.so
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
 	$(CC) main.c -o main -lso_stdio -L .
