@@ -21,6 +21,7 @@ typedef struct _so_file
     int _state;
     int exitState;
     int _update;
+    int _EOF;
     size_t f_offset;
     size_t buff_offset;
     size_t buff_size;

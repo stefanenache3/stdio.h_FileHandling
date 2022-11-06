@@ -173,6 +173,6 @@ FUNC_DECL_PREFIX SO_FILE *so_fopen(const char *pathname, const char *mode)
     handle->_state=_DEF;
     handle->exitState=_NORMAL_STATE;
     handle->_update=update;
-
+    handle->_EOF=0;
     return handle;
 }
