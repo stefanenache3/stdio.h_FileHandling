@@ -27,6 +27,7 @@ int ReadFromFile(SO_FILE *stream)
 #endif
 }
 
+
 int so_fgetc(SO_FILE *stream)
 {
     int ret;
@@ -60,9 +61,9 @@ int so_fgetc(SO_FILE *stream)
 
         stream->buff_offset = 0;
         stream->buff_size = ret;
-        stream->f_offset++;
+      
     }
-
+    stream->f_offset++;
     stream->_state = _RD;
     return (int)stream->buff[stream->buff_offset++];
 }

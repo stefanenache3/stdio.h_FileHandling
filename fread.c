@@ -7,9 +7,18 @@ size_t so_fread(void *ptr, size_t size, size_t nmemb, SO_FILE *stream)
     size_t count = 0;
     int check;
 
-    if (stream->buff_size - stream->buff_offset >= noRead) // daca in buffer avem mai multi octeti ramasi decat numarul solicitat vom
+    if(noRead==0)
+        return 0;
+
+    check = so_fgetc(stream); // in cazul in care s-a facut flush si buffer-ul este gol va fi umplut si putem verifica
+                              //  daca buffer-ul nu se umple si dimensiunea lui este mai mica decat nr de caractere care trebuiesc citite se simplifica operatia
+
+    if (check == SO_EOF)
+        return 0;
+      count++;
+    if (stream->buff_size - stream->buff_offset >= noRead-count) // daca in buffer avem mai multi octeti ramasi decat numarul solicitat vom
     {                                                      // copia pur si simplu numarul solicitat de octeti
-        memcpy((char *)ptr, stream->buff + stream->buff_offset, noRead);
+        memcpy((char *)ptr, stream->buff + stream->buff_offset-count, noRead);
         while (count < noRead)
         {
             check = so_fgetc(stream);
@@ -19,13 +28,8 @@ size_t so_fread(void *ptr, size_t size, size_t nmemb, SO_FILE *stream)
         return noRead;
     }
 
-    check = so_fgetc(stream); // in cazul in care s-a facut flush si buffer-ul este gol va fi umplut si putem verifica
-                              //  daca buffer-ul nu se umple si dimensiunea lui este mai mica decat nr de caractere care trebuiesc citite se simplifica operatia
 
-    if (check == SO_EOF)
-        return 0;
-
-    count++;
+  
     if ((stream->buff_size - stream->buff_offset) < noRead - count)
     {
         if (stream->buff_size < DEFAULT_BUFF_SIZE) // daca dimensiunea buffer-ului este mai mica de cat cea DEFAULT inseamna ca nu ar mai fi

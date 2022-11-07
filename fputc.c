@@ -1,5 +1,6 @@
 #include "_so_file.h"
 
+
 int so_fputc(int c, SO_FILE *stream)
 {
     int ok = -1;

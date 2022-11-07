@@ -23,12 +23,13 @@ int WriteInFile(SO_FILE *stream)
 }
 int so_fflush(SO_FILE *stream)
 {
-    if (stream->_state = _DEF)
+    if (stream->_state == _DEF)
         return 0;
     if (stream->_state == _RD)
     {
         stream->buff_offset = 0;
         stream->buff_size = 0;
+        stream->_state = _DEF;
         return 0;
     }
 
@@ -43,6 +44,6 @@ int so_fflush(SO_FILE *stream)
 
     stream->buff_size = 0;
     stream->buff_offset = 0;
-    stream->_state = _DEF;
+ 
     return 0;
 }
