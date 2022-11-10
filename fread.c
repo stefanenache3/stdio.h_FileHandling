@@ -54,7 +54,7 @@ size_t so_fread(void *ptr, size_t size, size_t nmemb, SO_FILE *stream)
                 check = so_fgetc(stream);
                 if (check == SO_EOF)
                     break;
-                aux[count++] = check;
+                aux[count] = check;
                 count++;
             }
 

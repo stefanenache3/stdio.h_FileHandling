@@ -5,13 +5,15 @@
  int tokenizeCommand(char* command,char ***args)
  {  
     *args=(char**)malloc(_MAX_ARGS*sizeof(char*));
+    char *toTok=(char*)malloc(strlen(command)+1);
+    strcpy(toTok,command);
     if(args==NULL)
         {
             //allocation failed;
             return -1;
         }
     for(int i=0;i<10;i++)
-        args[i]=NULL;
+        (*args)[i]=NULL;
     
     (*args)[0]=strdup("sh");
     (*args)[1]=strdup("-c");
@@ -19,15 +21,15 @@
     int nArgs=2;
 
     char *p=NULL;
-    p=strtok(command," ");
+    p=strtok(toTok," ");
     if(p==NULL)
         return 2;
     nArgs++;
 
     while(p)
     {
-        p=strtok(NULL," ");
         (*args)[nArgs-1]=strdup(p);
+          p=strtok(NULL," ");
         nArgs++;
     }
     
@@ -74,21 +76,23 @@ SO_FILE *so_popen(const char *command, const char *type)
         {
             close(pipe_fd[READ_END]);
             dup2(pipe_fd[WRITE_END],STDOUT_FILENO);
-            close(pipe_fd[WRITE_END]);
-            fd=STDOUT_FILENO;
+         //   close(pipe_fd[WRITE_END]);
+          //  fd=STDOUT_FILENO;
         }
         if(type[0]=='w')
         {
             close(pipe_fd[WRITE_END]);
             dup2(pipe_fd[READ_END],STDIN_FILENO);
-            close(pipe_fd[READ_END]);
-            fd=STDIN_FILENO;
+           // close(pipe_fd[READ_END]);
+          //  fd=STDIN_FILENO;
         }
 
         execvp(args[0],args);
     }
     if(pid>0)
-    {
+    {   
+        int stat;
+//        wait(&stat);
         if(type[0]=='r')
         {
             fcntl(pipe_fd[READ_END],F_SETFL,O_RDONLY);
@@ -105,6 +109,9 @@ SO_FILE *so_popen(const char *command, const char *type)
            f->_fd=pipe_fd[WRITE_END];
         }
     }
+
+    return f;
+}
 
     return f;
 }

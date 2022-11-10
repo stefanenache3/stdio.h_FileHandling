@@ -1,5 +1,6 @@
 #include "_so_file.h"
 
+
 size_t so_fwrite(const void *ptr, size_t size, size_t nmemb, SO_FILE *stream)
 {
     size_t noWrite = size * nmemb;

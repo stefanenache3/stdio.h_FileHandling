@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -Wall -fPIC -c
 SH := -shared
-objs := fopen.o fgetc.o fputc.o fread.o fflush.o fwrite.o
+objs := fopen.o fgetc.o fputc.o fread.o fflush.o fwrite.o feof
 
 .PHONY:clean
 #----------OLD VERSION----------------
