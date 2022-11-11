@@ -1,0 +1,1 @@
+Deoarece bloca executia checker-ului am comentat functia popen.Aceasta s-a dovedit insa functionala in testul din directorul /win
